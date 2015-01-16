@@ -9,7 +9,7 @@ var app = {
 	posts_url: "http://connectme-env-3bpnycxdry.elasticbeanstalk.com/api/event/?event_id=5497f8c7f1cd3133e8b4efc7",
 	onDeviceReady: function() {
 		console.log('Device is ready');
-		app.readPosts();
+		// app.readPosts();
 	},
 
 	readPosts: function() {
@@ -48,3 +48,5 @@ var app = {
 		console.log('Exiting onError');
 	}
 };
+
+app.readPosts();

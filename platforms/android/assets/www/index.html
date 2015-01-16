@@ -1,43 +1,171 @@
-<!doctype html>
-<meta charset="utf-8">
-<link rel="stylesheet" href="lib/onsen/css/onsenui.css">
-<link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
-<script src="lib/onsen/js/angular/angular.js"></script>
-<script src="lib/onsen/js/onsenui.js"></script>
-<script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-<script>
-  ons.bootstrap();
-  ons.ready(function() {
-    // Add another Onsen UI element
-    var content = document.getElementById("#my-content");
-    content.innerHTML="<ons-button>Another Button</ons-button>";
-    ons.compile(content);
-  });
-</script>
-<body>
-  <ons-navigator title="Navigator" var="myNavigator">
-    <ons-page>
-     <ons-toolbar>
-     <div class="center">Login</div>
-      </ons-toolbar>
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
 
-          <ons-row style="margin-top: 100px;">
-        <ons-col align="center">
-            <div class="appf">
-            <h1>LOGIN</h1>
-            <div id="login">
-                <ons-button  onclick="appf.login()">Login</ons-button>
-                <!-- <ons-button  onclick="appf.logout()">Logout</ons-button>
-                <ons-button onclick="myNavigator.pushPage('page2.html')">Next Page</ons-button>     -->   
-            </div>
-           </div>
-        </ons-col>
-      </ons-row>
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+     
+		    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        
+         <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <script type='text/javascript' src="js/bootstrap.min.js"></script>  
+
+        <title>Hello World</title>
+<style type="text/css">
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+*{margin:0;padding:0;}
+
+body{
+  background:ffffff;
+  font-family:'Open Sans',sans-serif;
+}
+
+.button{
+  width:100px;
+  background:#3399cc;
+  display:block;
+  margin:0 auto;
+  margin-top:1%;
+  padding:10px;
+  text-align:center;
+  text-decoration:none;
+  color:#fff;
+  cursor:pointer;
+  transition:background .3s;
+  -webkit-transition:background .3s;
+}
+
+.button:hover{
+  background:#2288bb;
+}
+
+#login{
+  width:100%;
+  margin:0 auto;
+  margin-top:8px;
+  margin-bottom:2%;
+  transition:opacity 1s;
+  -webkit-transition:opacity 1s;
+}
+
+#triangle{
+  width:0;
+  border-top:12x solid transparent;
+  border-right:12px solid transparent;
+  border-bottom:12px solid #3399cc;
+  border-left:12px solid transparent;
+  margin:0 auto;
+}
+
+.centered {
+  position: fixed; /* or absolute */
+  top: 30%;
+  left: 0%;
+}
+
+#login h1{
+  background:#3399cc;
+  padding:20px 0;
+  font-size:140%;
+  font-weight:300;
+  text-align:center;
+  color:#fff;
+}
+
+form{
+  background:ffffff;
+  padding:6% 4%;
+}
+
+input[type="email"],input[type="password"]{
+  width:70%;
+  background:#fff;
+  margin-bottom:4%;
+  border:1px solid #ccc;
+  padding:4%;
+  font-family:'Open Sans',sans-serif;
+  font-size:95%;
+  color:#555;
+}
+
+input[type="submit"]{
+  width:100%;
+  background:#3399cc;
+  border:0;
+  padding:4%;
+  font-family:'Open Sans',sans-serif;
+  font-size:100%;
+  color:#fff;
+  cursor:pointer;
+  transition:background .3s;
+  -webkit-transition:background .3s;
+}
+
+input[type="submit"]:hover{
+  background:#2288bb;
+}
+</style>
+
+
+ 
+
+    </head>
+    <body>
+      <div class="centered" style="width:100%; text-align: center; margin:0 auto;">
+        <div class="center">
+
+
+
+
+
+<div id="login">
+    <h1>Login with Facebook</h1>
+ 
+ 
     
-    </ons-page>
+    <button style="width:100%;
+  background:#3399cc;
+  border:0;
+  padding:4%;
+  font-family:'Open Sans',sans-serif;
+  font-size:100%;
+  color:#fff;" onclick="app.login()">Login</button>
+ 
+</div>
+<!-- 
+            <h1>Login with Facebook</h1>
 
-  </ons-navigator>
-</body>
+			<div class="center" id="login">
 
-
+				<button type="button" class="btn btn-default" onclick="app.login()">Login</button>
+				<!-- <button onclick="app.logout()">Logout</button> -->
+		 
+        </div>
+      </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    
+    </body>
+</html>

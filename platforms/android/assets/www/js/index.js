@@ -16,7 +16,28 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var appf = {
+var app = {
+	//call the database, and either create this user or log them in
+	//returns their user_id, for use with all other queries
+	loginUser: function() {
+	 
+		var name = localStorage.getItem("name");
+		var facebookID = localStorage.getItem("facebookID");
+		var accessToken = localStorage.getItem("accessToken");
+		
+		$.post("http://connectme-env-39mscffus9.elasticbeanstalk.com/api/login/",
+		{
+			"name": name,
+			"facebook_id": facebookID,
+			"access_token": accessToken,
+			"picture_url": "https://graph.facebook.com/" + facebookID + "/picture?type=square"
+		}, function(data, status) {
+			 
+			localStorage.setItem("user_id", data);
+			window.location.replace("index4.html");
+		});
+	},
+
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -40,73 +61,65 @@ var appf = {
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
- 
+
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
- 
+
         console.log('Received Event: ' + id);
     },
-     
-    login: function() {
-        // alert("Here");
-        var fbDataSuccess = function(data) {
-            // alert("Here again");
-            alert(JSON.stringify(data));
-            // alert("name: " + data.name);
-            name = data.name;
-            localStorage.setItem("name", data.name)
-             
-            // alert("name:" + localStorage.getItem("name"))
-            // alert("facebookID" + localStorage.getItem("facebookID"))
-            // alert("accessToken" + localStorage.getItem("accessToken"))
-        }
-         
-        var fbPictureSuccess = function(data) {
-            alert(JSON.stringify(data));
-        }
-     
-        var fbLoginSuccess = function (userData) {
-            //alert(JSON.stringify(userData.authResponse));
-            //alert(userData.authResponse.accessToken)
-             
-             
-            localStorage.setItem("facebookID", userData.authResponse.userID)
-            localStorage.setItem("accessToken", userData.authResponse.accessToken)
-             
-            //var facebookID = userData.userID
-            //var accessToken = userData.authResponse.accessToken
-             
-             
-            facebookConnectPlugin.api('/me', ["public_profile"], fbDataSuccess, function(error) {alert(""+error)})
- 
-            //facebookConnectPlugin.api('/me/picture', ["public_profile"], fbPictureSuccess, function(error) {alert(""+error)})
-             
-            console.log(JSON.stringify(userData))
-             
-        }
- 
-        facebookConnectPlugin.login(["public_profile"],
-            fbLoginSuccess,
-            function (error) { alert("" + error) }
-        );
+	
+	login: function() {
+		var fbDataSuccess = function(data) {
+			// alert(JSON.stringify(data));
+			name = data.name;
+			localStorage.setItem("name", data.name)
+			
+			
+			app.loginUser();
+		}
+		
+		var fbPictureSuccess = function(data) {
+			alert(JSON.stringify(data));
+		}
+	
+		var fbLoginSuccess = function (userData) {
+			//alert(JSON.stringify(userData.authResponse));
+			//alert(userData.authResponse.accessToken)
+			
+			
+			localStorage.setItem("facebookID", userData.authResponse.userID)
+			localStorage.setItem("accessToken", userData.authResponse.accessToken)
+			
+			//var facebookID = userData.userID
+			//var accessToken = userData.authResponse.accessToken
+			
+			
+			facebookConnectPlugin.api('/me', ["public_profile"], fbDataSuccess, function(error) {alert(""+error)})
 
+			//facebookConnectPlugin.api('/me/picture', ["public_profile"], fbPictureSuccess, function(error) {alert(""+error)})
+			
+			console.log(JSON.stringify(userData))
+			
+		}
 
-        window.location="index2.html";
-    },
-     
-    logout: function() {
-        alert("Exithere");
-        var fbLogoutSuccess = function(data) {
-            alert("Logged out")
-        }
-     
-        facebookConnectPlugin.logout(fbLogoutSuccess,
-            function (error) { console.log("" + error) }
-        );
-     
-    }
-     
-     
+		facebookConnectPlugin.login(["public_profile"],
+			fbLoginSuccess,
+			function (error) { alert("" + error) }
+		);
+	},
+	
+	logout: function() {
+		var fbLogoutSuccess = function(data) {
+			alert("Logged out")
+		}
+	
+		facebookConnectPlugin.logout(fbLogoutSuccess,
+			function (error) { console.log("" + error) }
+		);
+	
+	}
+	
+	
 };
- 
-appf.initialize();
+
+app.initialize();
